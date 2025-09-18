@@ -1,0 +1,367 @@
+/* Estilos Generales y Reset Básico */
+:root {
+    --primary-color: #000080; /* Azul vibrante */
+    --secondary-color: #6c757d; /* Gris para texto secundario */
+    --dark-color: #343a40; /* Negro casi oscuro para fondos */
+    --light-color: #f8f9fa; /* Gris muy claro para fondos */
+    --white-color: #ffffff;
+    --text-color: #212529; /* Gris oscuro para texto principal */
+    --font-family-sans: 'Arial', sans-serif;
+    --font-family-serif: 'Georgia', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family-sans);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--light-color);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden; /* Para limpiar floats */
+    padding: 20px 0;
+}
+
+/* Encabezado (Header) */
+header {
+    background: #FFFAFA;
+    color: var(--white-color);
+    padding: 1rem 0;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas pequeñas */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--text-color);
+}
+
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Para que los ítems de navegación se ajusten */
+}
+
+header nav ul li {
+    margin-left: 20px;
+}
+
+header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+header nav ul li a:hover {
+    color: #000080;
+}
+
+/* Sección Hero (Inicio) */
+.hero {
+    background: var(--primary-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 100px 20px;
+    position: relative;
+    overflow: hidden;
+    /* Fondo con un patrón sutil o una imagen relevante de seguridad */
+    background-image: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Ciberseguridad'); /* Placeholder, reemplaza con una imagen real */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay; /* Para que el color primary_color se superponga sutilmente */
+}
+
+.hero::before { /* Capa oscura para mejor lectura del texto */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(45, 58, 51, 0.5);
+    z-index: 1;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté sobre la capa oscura */
+}
+
+.hero h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: #008080;
+    color: var(--white-color);
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Secciones de Contenido */
+section {
+    padding: 60px 0;
+}
+
+section:nth-of-type(even) { /* Fondo alternado para legibilidad */
+    background-color: var(--white-color);
+}
+
+section h3 {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+section h3::after { /* Subrayado decorativo */
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+section h4 ::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    transform: translateX(-50%);
+}
+
+/* Sección de Servicios */
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-item {
+    background: var(--white-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+section:nth-of-type(even) .service-item { /* Sombra más sutil en fondo blanco */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-item h4 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Sección Contacto */
+.contact form {
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+    background: var(--white-color);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact input[type="text"],
+.contact input[type="email"],
+.contact textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contact textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.contact button.btn {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.contact p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1rem;
+}
+
+
+/* Pie de Página (Footer) */
+footer {
+    background: var(--dark-color);
+    color
+}
+
+
+
+
+/* --- Estilos para la Sección del Director General --- */
+
+.ceo-profile {
+    /* Usa Flexbox para alinear la imagen y el texto uno al lado del otro */
+    display: flex;
+    /* Alinea los elementos al inicio (parte superior) del contenedor */
+    align-items: flex-start;
+    /* Espacio entre la imagen y el texto */
+    gap: 30px;
+    /* Margen superior para separar esta sección de la anterior */
+    margin-top: 30px;
+    /* Permite que los elementos se envuelvan a la siguiente línea en pantallas pequeñas */
+    flex-wrap: wrap;
+    /* Opcional: Centra el contenido cuando se envuelve */
+    justify-content: center;
+}
+
+.ceo-image {
+    /* Define el tamaño de la imagen */
+    width: 200px;
+    height: 200px;
+    /* Hace la imagen circular */
+    border-radius: 50%;
+    /* Asegura que la imagen cubra el área sin distorsión, recortando si es necesario */
+    object-fit: cover;
+    /* Opcional: Un borde alrededor de la imagen para destacarla */
+    border: 4px solid #0056b3; /* Un azul más oscuro */
+    /* Opcional: Una sombra sutil para darle profundidad */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    /* Evita que la imagen se encoja en pantallas pequeñas antes que el texto */
+    flex-shrink: 0;
+}
+
+.ceo-description {
+    /* Permite que esta sección ocupe el espacio restante disponible */
+    flex-grow: 1;
+    /* Asegura que la descripción no se desborde del contenedor principal */
+    max-width: 700px; /* Limita el ancho máximo para mejor legibilidad */
+    /* Opcional: Alineación del texto */
+    text-align: justify;
+}
+
+.ceo-description p {
+    /* Espacio entre los párrafos de la descripción */
+    margin-bottom: 15px;
+    /* Ajusta el tamaño de la fuente para la descripción */
+    font-size: 1.05em;
+    /* Altura de línea para mejorar la legibilidad */
+    line-height: 1.6;
+    color: #333; /* Color de texto más oscuro */
+}
+
+/* --- Media Queries para Adaptabilidad (Responsive Design) --- */
+
+@media (max-width: 992px) {
+    .ceo-profile {
+        /* Reduce el espacio entre elementos en pantallas medianas */
+        gap: 20px;
+    }
+
+    .ceo-image {
+        /* Reduce un poco el tamaño de la imagen en pantallas medianas */
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ceo-profile {
+        /* Apila la imagen y el texto verticalmente en pantallas pequeñas */
+        flex-direction: column;
+        /* Centra la imagen y el texto cuando están apilados */
+        align-items: center;
+        /* Reduce el margen superior */
+        margin-top: 20px;
+    }
+
+    .ceo-image {
+        /* Añade espacio debajo de la imagen cuando está apilada */
+        margin-bottom: 20px;
+        /* Tamaño de la imagen para móviles */
+        width: 150px;
+        height: 150px;
+    }
+
+    .ceo-description {
+        flex-grow: 1;
+    max-width: 700px;
+    text-align: justify;
+    background-color: darkblue; /* Otro tono de azul muy claro (aliceblue) */
+    padding: 20px; /* Añade espacio alrededor del texto */
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    }
+
+    .ceo-description p {
+        font-size: 1em; /* Ajusta el tamaño de la fuente para móviles */
+         margin-bottom: 15px;
+    font-size: 1.05em;
+    line-height: 1.6;
+    color: #333;
+    }
+}
+
+@media (max-width: 480px) {
+    .ceo-image {
+        /* Reduce aún más el tamaño de la imagen en pantallas muy pequeñas */
+        width: 120px;
+        height: 120px;
+    }
+}
+
+}

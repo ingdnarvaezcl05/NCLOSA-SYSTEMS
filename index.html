@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCLOSA Systems - Desarrollo y Seguridad</title>
+    <link rel="icon" type="image/x-icon" href="./logo_final.ico">
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --primary-red: #d30000;
+            --dark-red: #8a0000;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-tech: 'Courier New', Courier, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--primary-red);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            display: block;
+            width: 52px;
+            height: 52px;
+            flex-shrink: 0;
+            object-fit: contain;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .brand-name {
+            display: flex;
+            gap: 8px;
+            align-items: baseline;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .brand-name span {
+            color: var(--primary-red);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-red);
+        }
+
+        .btn-admin {
+            background-color: transparent;
+            border: 1px solid var(--primary-red);
+            color: var(--primary-red);
+            padding: 8px 15px;
+            cursor: pointer;
+            font-family: var(--font-tech);
+            transition: all 0.3s ease;
+        }
+
+        .btn-admin:hover {
+            background-color: var(--primary-red);
+            color: #fff;
+            box-shadow: 0 0 10px var(--primary-red);
+        }
+
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(211, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-family: var(--font-tech);
+            color: #cccccc;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .services {
+            padding: 50px 10%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(5,5,5,1) 100%);
+        }
+
+        .services h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-red);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #333;
+            padding: 30px;
+            border-radius: 5px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 15px rgba(211, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: var(--primary-red);
+            margin-bottom: 15px;
+            font-family: var(--font-tech);
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #bbbbbb;
+        }
+
+        .contact {
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary-red);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .contact-box {
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid #333;
+            padding: 40px;
+            border-radius: 5px;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: border-color 0.3s;
+        }
+
+        .contact-box:hover {
+            border-color: var(--primary-red);
+            box-shadow: 0 0 15px rgba(211, 0, 0, 0.2);
+        }
+
+        .contact-box p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #bbbbbb;
+        }
+
+        .contact-box strong {
+            color: var(--primary-red);
+            font-family: var(--font-tech);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-box a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-box a:hover {
+            color: var(--primary-red);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .login-box {
+            background: #111;
+            padding: 40px;
+            width: 350px;
+            border: 1px solid var(--primary-red);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(211, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-family: var(--font-tech);
+            color: var(--primary-red);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #444;
+            color: #fff;
+            outline: none;
+            font-family: var(--font-tech);
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-red);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-red);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background: var(--dark-red);
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="binaryCanvas"></canvas>
+
+    <header>
+        <div class="brand">
+            <img class="logo" src="./logo_final.ico" alt="NCLOSA Systems">
+            <div class="brand-name">NCLOSA <span>Systems Inc</span></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><button class="btn-admin" onclick="toggleModal()">ADMIN LOGIN</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Arquitectura Tecnológica</h1>
+        <p>Soluciones integrales en Desarrollo de Software, Ciberseguridad y Administración de Infraestructura de Redes.</p>
+        <button class="btn-admin" style="padding: 12px 30px; font-size: 1.1rem;">Ver Proyectos</button>
+    </section>
+
+    <section class="services" id="servicios">
+        <center><h2>Áreas de Especialidad</h2></center>
+        <div class="cards">
+            <div class="card">
+                <h3>[1] Desarrollo de Software</h3>
+                <p>Creación de aplicaciones a medida y automatización de procesos utilizando Python, JavaScript, C++ y Java. Diseño de bases de datos SQL eficientes.</p>
+            </div>
+            <div class="card">
+                <h3>[2] Infraestructura de Redes</h3>
+                <p>Diseño y configuración de topologías físicas y lógicas. Administración de entornos Linux, servidores locales y optimización de redes empresariales.</p>
+            </div>
+            <div class="card">
+                <h3>[3] Ciberseguridad</h3>
+                <p>Análisis de vulnerabilidades, implementación de controles de acceso y aplicación de protocolos de seguridad basados en normativas internacionales.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <center><h2>Información de Contacto</h2></center>
+        <div class="contact-box">
+            <p><strong>Contacto Principal</strong> Ing. Carlos D Narváez</p>
+            <p><strong>Correo Electrónico</strong> <a href="mailto:nclosa.inc@outlook.com">nclosa.inc@outlook.com</a></p>
+            <p><strong>Ubicación</strong> 2a. Cda. Volcanes Manzana 042, Jardines del Alba 2, 54750 Cuautitlán Izcalli, Méx.</p>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-box">
+            <span class="close-btn" onclick="toggleModal()">&times;</span>
+            <h2>ACCESO SEGURO</h2>
+            <form onsubmit="event.preventDefault(); alert('Autenticación en construcción...'); toggleModal();">
+                <div class="input-group">
+                    <input type="text" placeholder="ID de Usuario / Root" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn-submit">INICIAR SESIÓN</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('loginModal');
+            modal.classList.toggle('modal-active');
+        }
+
+        const canvas = document.getElementById('binaryCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const characters = '01';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array.from({ length: columns }).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#d30000';
+            ctx.font = fontSize + 'px Courier New';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
